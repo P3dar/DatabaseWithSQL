@@ -1,4 +1,4 @@
-CREATE DATABASE CompagniaAerea;
+CREATE SCHEMA CompagniaAerea;
 
 USE CompagniaAerea;
 
