@@ -1,0 +1,59 @@
+CREATE DATABASE CompagniaAerea;
+
+USE CompagniaAerea;
+
+CREATE TABLE Voli (
+numero_volo INT PRIMARY KEY,
+aeroporto_partenza VARCHAR(50),
+aeroporto_destinazione VARCHAR(50),
+data_partenza DATE,
+ora_partenza TIME,
+data_arrivo DATE,
+ora_arrivo TIME,
+prezzo DECIMAL(10, 2),
+posti_disponibili INT
+);
+
+CREATE TABLE Passeggeri (
+id INT PRIMARY KEY,
+nome VARCHAR(50),
+cognome VARCHAR(50),
+data_nascita DATE,
+email VARCHAR(50),
+telefono VARCHAR(20)
+);
+
+CREATE TABLE Prenotazioni (
+id INT PRIMARY KEY,
+id_volo INT REFERENCES Voli(numero_volo),
+id_passeggero INT REFERENCES Passeggeri(id),
+data_prenotazione DATE,
+prezzo DECIMAL(10, 2)
+);
+
+CREATE TABLE Aerei (
+id INT PRIMARY KEY,
+modello VARCHAR(50),
+posti_a_sedere INT,
+data_acquisto DATE
+);
+
+CREATE TABLE Personale (
+id INT PRIMARY KEY,
+nome VARCHAR(50),
+cognome VARCHAR(50),
+ruolo VARCHAR(50),
+stipendio DECIMAL(10, 2)
+);
+
+Esempi di query:
+
+Selezionare tutti i voli disponibili per una data e un percorso specifici:
+SELECT * FROM Voli WHERE aeroporto_partenza = 'Milano' AND aeroporto_destinazione = 'New York' AND data_partenza = '2023-03-10';
+
+Selezionare tutte le prenotazioni effettuate da un determinato passeggero:
+SELECT * FROM Prenotazioni WHERE id_passeggero = 123;
+
+Aggiornare il prezzo di un volo:
+UPDATE Voli SET prezzo = 500.00 WHERE numero_volo = 456;
+
